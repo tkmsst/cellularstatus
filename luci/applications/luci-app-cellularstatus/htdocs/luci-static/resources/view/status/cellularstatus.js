@@ -20,28 +20,30 @@ function reception_lv(v) {
 	}
 
 	var i, c;
-	if (pc <= 0) {
-		pc = 0;
-		i = L.resource('icons/signal-none.png');
-		c = 'black';
-	} else if (pc < 10) {
-		i = L.resource('icons/signal-0.png');
-		c = 'black';
-	} else if (pc < 25) {
-		i = L.resource('icons/signal-0-25.png');
-		c = 'red';
-	} else if (pc < 50) {
+	if (pc >= 50) {
+		if (pc >= 75) {
+			if (pc > 100) {
+				pc = 100;
+			}
+			i = L.resource('icons/signal-75-100.png');
+		} else {
+			i = L.resource('icons/signal-50-75.png');
+		}
+		c = 'green';
+	} else if (pc >= 25) {
 		i = L.resource('icons/signal-25-50.png');
 		c = 'orange';
-	} else if (pc < 75) {
-		i = L.resource('icons/signal-50-75.png');
-		c = 'green';
+	} else if (pc >= 10) {
+		i = L.resource('icons/signal-0-25.png');
+		c = 'red';
 	} else {
-		if (pc > 100) {
-			pc = 100;
+		if (pc > 0) {
+			i = L.resource('icons/signal-0.png');
+		} else {
+			pc = 0;
+			i = L.resource('icons/signal-none.png');
 		}
-		i = L.resource('icons/signal-75-100.png');
-		c = 'green';
+		c = 'grey';
 	}
 
 	return {
